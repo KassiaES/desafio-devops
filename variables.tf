@@ -1,3 +1,16 @@
+# Variável para o nome de usuário do administrador
+variable "admin_username" {
+  description = "O nome de usuário do administrador para a VM"
+  type        = string
+}
+
+# Variável para a senha do administrador
+variable "admin_password" {
+  description = "A senha do administrador para a VM"
+  type        = string
+  sensitive   = true
+}
+
 # Variável para definir a localização dos recursos na Azure
 variable "location" {
   description = "Localização onde os recursos serão criados." # Descrição da variável
@@ -45,3 +58,5 @@ variable "subnet_prefix" {
   type        = list(string)                       # Tipo da variável
   default     = ["10.0.1.0/24"]                    # Valor padrão da variável
 }
+
+

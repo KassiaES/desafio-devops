@@ -37,8 +37,8 @@ resource "azurerm_linux_virtual_machine" "vm" {
 
   # Configuração do administrador
   computer_name  = "wordpressvm"
-  admin_username = "azureuser"
-  admin_password = "VamoPraCima!123"
+  admin_username = var.admin_username
+  admin_password = var.admin_password
 
   # Script de inicialização codificado em base64
   custom_data = filebase64("${path.module}/script.sh")
