@@ -1,18 +1,3 @@
-# Criação da interface de rede (NIC)
-resource "azurerm_network_interface" "nic" {
-  name                = "wordpress-nic"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-
-  # Configuração de IP para a NIC
-  ip_configuration {
-    name                          = "wordpress-ip-config"
-    subnet_id                     = azurerm_subnet.subnet.id
-    private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.public_ip.id
-  }
-}
-
 # Criação da máquina virtual (VM)
 resource "azurerm_linux_virtual_machine" "vm" {
   name                = "wordpress-vm"
