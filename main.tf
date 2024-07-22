@@ -1,8 +1,8 @@
 terraform {
   required_providers {
     azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "3.112.0"
+      source = "hashicorp/azurerm"
+      version = "3.113.0"
     }
   }
 }
@@ -24,7 +24,7 @@ module "network" {
   resource_group_name = azurerm_resource_group.rg.name   # Nome do grupo de recursos
   location            = azurerm_resource_group.rg.location # Localização do grupo de recursos
   subnet_prefix = var.subnet_prefix                       # Prefixo de endereço da sub-rede
-  address_space = var.address_space                       # Espaço de endereço da VNet
+  address_space = var.address_space                      # Espaço de endereço da VNet
 }
 
 # Criação da máquina virtual usando o módulo vm
@@ -32,7 +32,7 @@ module "vm" {
   source              = "./vm"                           # Fonte do módulo de VM
   resource_group_name = azurerm_resource_group.rg.name   # Nome do grupo de recursos
   location            = azurerm_resource_group.rg.location # Localização do grupo de recursos
-  subnet_id           = module.network.subnet_id         # ID da sub-rede
+  network_interface_id = module.network.network_interface_id         # ID da sub-rede
   admin_username = var.admin_username
   admin_password = var.admin_password
 }

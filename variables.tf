@@ -2,7 +2,6 @@
 variable "admin_username" {
   description = "O nome de usuário do administrador para a VM"
   type        = string
-  sensitive   = true
   default = "kassia"
 }
 
@@ -24,8 +23,8 @@ variable "location" {
 # Variável para definir o nome do grupo de recursos
 variable "resource_group_name" {
   description = "Nome do grupo de recursos onde os recursos serão criados." # Descrição da variável
-  type        = string        # Tipo da variável
-  default = "wordpress-rg"    # Nome do grupo de recursos            
+  type        = string                                                      # Tipo da variável
+  default     = "wordpress-rg"                                              # Nome do grupo de recursos
 }
 
 # Variável para definir o nome do grupo de segurança de rede (NSG)
@@ -62,5 +61,3 @@ variable "subnet_prefix" {
   type        = list(string)                       # Tipo da variável
   default     = ["10.0.1.0/24"]                    # Valor padrão da variável
 }
-
-
