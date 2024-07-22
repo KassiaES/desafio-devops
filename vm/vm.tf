@@ -24,6 +24,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   computer_name  = "wordpressvm"
   admin_username = var.admin_username
   admin_password = var.admin_password
+  disable_password_authentication = false
 
   # Script de inicialização codificado em base64
   custom_data = filebase64("${path.module}/script.sh")

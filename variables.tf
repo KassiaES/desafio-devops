@@ -3,6 +3,7 @@ variable "admin_username" {
   description = "O nome de usuário do administrador para a VM"
   type        = string
   default = "kassia"
+  sensitive   = true
 }
 
 # Variável para a senha do administrador

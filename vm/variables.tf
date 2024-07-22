@@ -24,7 +24,7 @@ variable "admin_password" {
   description = "A senha do administrador para a VM"
   type        = string
   sensitive   = true
-  default = "aw3se4dr5"
+  default = "VamosPraCima!123"
 }
 
 variable "network_interface_id" {

@@ -14,7 +14,6 @@ resource "azurerm_subnet" "subnet" {
   address_prefixes     = var.subnet_prefix              #["10.0.1.0/24"] # Prefixo de endereço da sub-rede
 }
 
-
 resource "azurerm_public_ip" "public_ip" {
   name                = "wordpress-ip_public"
   resource_group_name = var.resource_group_name
