@@ -17,6 +17,10 @@ sudo chmod +x /usr/local/bin/docker-compose
 mkdir -p ~/docker_wordpress
 cd ~/docker_wordpress
 
+# Criar arquivos de segredos
+echo "GAud4mZby8F3SD6P" > ./mysql_root_password.txt
+echo "GAud4mZby8F3SD6P" > ./wordpress_db_password.txt
+
 # Criar arquivo docker-compose.yml
 cat <<EOF > docker-compose.yml
 version: '3.8'
@@ -30,23 +34,33 @@ services:
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: root
-      WORDPRESS_DB_PASSWORD: GAud4mZby8F3SD6P
+      WORDPRESS_DB_PASSWORD_FILE: /run/secrets/wordpress_db_password
       WORDPRESS_DB_NAME: wordpress
     volumes:
       - wordpress:/var/www/html
+    secrets:
+      - wordpress_db_password
 
   db:
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: GAud4mZby8F3SD6P
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
       MYSQL_DATABASE: wordpress
     volumes:
       - db_data:/var/lib/mysql
+    secrets:
+      - mysql_root_password
 
 volumes:
   wordpress:
   db_data:
+
+secrets:
+  mysql_root_password:
+    file: ./mysql_root_password.txt
+  wordpress_db_password:
+    file: ./wordpress_db_password.txt
 EOF
 
 # Subir containers com Docker Compose
@@ -57,3 +71,4 @@ sleep 30
 
 # Verificar o status dos containers
 sudo docker-compose ps
+

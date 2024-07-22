@@ -76,7 +76,7 @@ resource "azurerm_network_security_group" "nsg" {
 
   depends_on = [                      # Define a dependência entre o NSG e o grupo de recursos para garantir que o grupo de recursos
     azurerm_resource_group.rg         # seja criado antes do NSG ser provisionado. Isso é necessário para garantir que o NSG
-  ]                                   # seja associado ao grupo de recursos correto.
+  ]                                   
 }
 
 # Associação do NSG com a interface de rede

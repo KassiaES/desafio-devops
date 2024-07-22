@@ -1,8 +1,7 @@
 # Variável para o nome de usuário do administrador
 variable "admin_username" {
   description = "O nome de usuário do administrador para a VM"
-  type        = string
-  default = "kassia"
+  type        = string  
   sensitive   = true
 }
 
@@ -10,8 +9,7 @@ variable "admin_username" {
 variable "admin_password" {
   description = "A senha do administrador para a VM"
   type        = string
-  sensitive   = true
-  default = "VamosPraCima!123"
+  sensitive   = true  
 }
 
 # Variável para definir a localização dos recursos na Azure
