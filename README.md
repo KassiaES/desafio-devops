@@ -35,7 +35,7 @@ Este guia detalhado explica como implantar um site WordPress completo na Azure u
      admin_username = "seu_nome_de_usuario"
      admin_password = "sua_senha_forte"
      ```
-   - **Importante:** As variáveis `admin_username` e `admin_password` devem ser definidas neste arquivo para que o Terraform possa usá-las.
+   - **Importante:** Há um um arquivo de exemplo `terraform.tfvars.example`. As variáveis `admin_username` e `admin_password` devem ser definidas neste arquivo para que o Terraform possa usá-las.
 
 6. **Faça Login na Sua Conta Azure:**
    - Abra um terminal ou prompt de comando em sua máquina local.
