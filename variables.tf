@@ -25,6 +25,7 @@ variable "resource_group_name" {
   description = "Nome do grupo de recursos onde os recursos serão criados." # Descrição da variável
   type        = string                                                      # Tipo da variável
   default     = "wordpress-rg"                                              # Nome do grupo de recursos
+                                            
 }
 
 # Variável para definir o nome do grupo de segurança de rede (NSG)
