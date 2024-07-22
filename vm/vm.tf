@@ -1,9 +1,9 @@
 # Criação da máquina virtual (VM)
 resource "azurerm_linux_virtual_machine" "vm" {
   name                = "wordpress-vm"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-  network_interface_ids = [var.network_interface_id]
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  network_interface_ids =  [var.network_interface_id] #[azurerm_network_interface.nic.id]
   size                = "Standard_B1s"
 
   # Configuração do disco do sistema operacional

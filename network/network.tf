@@ -1,33 +1,42 @@
-# Variável para definir a localização dos recursos na Azure
-variable "location" {
-  description = "Localização onde os recursos serão criados." # Descrição da variável
-  type        = string                                          # Tipo da variável
-#   default     = "East US"                                       # Valor padrão da variável
+# Definição da rede virtual (VNet)
+resource "azurerm_virtual_network" "vnet" {
+  name                = "wordpress-vnet"                # Nome da VNet
+  address_space       = var.address_space               #["10.0.0.0/16"]   # Espaço de endereço da VNet
+  location            = var.location                    # Localização da VNet
+  resource_group_name = var.resource_group_name         # Nome do grupo de recursos
 }
 
-# Variável para definir o nome do grupo de recursos
-variable "resource_group_name" {
-  description = "Nome do grupo de recursos onde os recursos serão criados." # Descrição da variável
-  type        = string                                                      # Tipo da variável
-#   default     = "wordpress-rg"                                              # Nome do grupo de recursos
+# Definição da sub-rede dentro da VNet
+resource "azurerm_subnet" "subnet" {
+  name                 = "wordpress-subnet"             # Nome da sub-rede
+  resource_group_name  = var.resource_group_name        # Nome do grupo de recursos
+  virtual_network_name = azurerm_virtual_network.vnet.name # Nome da VNet criada acima
+  address_prefixes     = var.subnet_prefix              #["10.0.1.0/24"] # Prefixo de endereço da sub-rede
 }
 
-# Variável para definir o espaço de endereço da VNet
-variable "address_space" {
-  description = "Espaço de endereço da rede virtual (VNet)." # Descrição da variável
-  type        = list(string)                                 # Tipo da variável
-#   default     = ["10.0.0.0/16"]                              # Valor padrão da variável
+
+resource "azurerm_public_ip" "public_ip" {
+  name                = "wordpress-ip_public"
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  allocation_method   = "Static"
+
+  tags = {
+    environment = "Production"
+  }
 }
 
-# Variável para definir o prefixo de endereço da sub-rede
-variable "subnet_prefix" {
-  description = "Prefixo de endereço da sub-rede." # Descrição da variável
-  type        = list(string)                       # Tipo da variável
-#   default     = ["10.0.1.0/24"]                    # Valor padrão da variável
-}
+# Criação da interface de rede (NIC)
+resource "azurerm_network_interface" "nic" {
+  name                = "wordpress-nic"
+  location            = var.location
+  resource_group_name = var.resource_group_name  #azurerm_resource_group.rg.name
 
-variable "network_security_group_name" {
-  description = "Nome do SG"
-  type = string
-  default = "NSG desafio"
+  # Configuração de IP para a NIC
+  ip_configuration {
+    name                          = "wordpress-ip-config"
+    subnet_id                     = azurerm_subnet.subnet.id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.public_ip.id
+  }
 }

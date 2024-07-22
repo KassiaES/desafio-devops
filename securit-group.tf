@@ -63,6 +63,6 @@ resource "azurerm_network_security_group" "nsg" {
 
 # Associação do NSG com a interface de rede
 resource "azurerm_network_interface_security_group_association" "nsg_association" {  
-  network_interface_id      = azurerm_network_interface.nic.id  # ID da interface de rede que receberá o NSG 
+  network_interface_id      = module.network.network_interface_id  # ID da interface de rede que receberá o NSG 
   network_security_group_id = azurerm_network_security_group.nsg.id   # ID do NSG a ser associado
 }
