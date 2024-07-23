@@ -4,3 +4,5 @@
 !/secrets/.gitkeep
 
 terraform.tfvars
+
+.tfstate
