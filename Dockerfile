@@ -7,6 +7,6 @@ EXPOSE 80
 # Adição do usuário "kassia" com o ID 3375
 RUN useradd -u 3375 kassia
 
-# Mude para o usuário não-root "john"
+# Ajuste para o usuário não-root
 USER kassia
 
